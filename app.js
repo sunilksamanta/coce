@@ -29,15 +29,15 @@ app.get('/cover', (req, res) => {
     providers = providers == undefined ? coce.config.providers : providers.split(',')
     const callback = req.query.callback
 
-    const fetcher = new coce.CoceFetcher();
+    var fetcher = new coce.CoceFetcher()
     fetcher.fetch(ids, providers, function (url) {
         if (req.query.all === undefined) {
             // Not &all param: URL are picked up by provider priority order
             // Just the first available url
-            const ret = {};
-            for (let id in url)
-                let j = 0, provider; for (; provider = providers[j]; j++) {
-                    const u = url[id][provider];
+            var ret = {}
+            for (var id in url)
+                for (var j = 0, provider; provider = providers[j]; j++) {
+                    var u = url[id][provider]
                     if (u !== undefined) {
                         ret[id] = u;
                         break;
