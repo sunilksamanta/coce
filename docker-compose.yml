@@ -1,0 +1,30 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+
+  coce_app:
+    image: coce/coce-book-covers
+    build: .
+    command: pm2-runtime app.js
+    volumes:
+      - .:/usr/src/app/
+      - /usr/src/app/node_modules
+    depends_on:
+      - redis
+    links:
+      - redis
+    ports:
+      - "3009"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - coce_app
+    ports:
+      - "8001:3009"

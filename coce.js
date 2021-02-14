@@ -151,7 +151,9 @@ CoceFetcher.prototype.ol = function(ids) {
 
 /**
  * Add an url to redis
- * @param {int} increment Increment the number of found IDs. No parameter = 1.
+ * @param provider
+ * @param id
+ * @param url
  */
 CoceFetcher.prototype.addurl = function(provider, id, url) {
   redis.setex(`${provider}.${id}`, config[provider].timeout, url);
