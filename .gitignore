@@ -2,3 +2,4 @@ node_modules
 .well-known/
 .idea
 .vscode
+.env

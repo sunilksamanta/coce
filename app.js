@@ -11,7 +11,11 @@ app.get('/', function (req, res) {
 const isbnRE = /([0-9X]{10,13})/
 
 app.get('/cover', (req, res) => {
-    let ids = req.query.id
+    let ids = req.query.id;
+    const api_key = req.query.api_key;
+    if( !api_key || api_key !== process.env.API_KEY ) {
+        return res.status(401).json( { error: 'Unauthorized'} )
+    }
     if (ids === undefined || ids.length < 8) {
         var fail = {}
         fail.error = "ID parameter is missing"
