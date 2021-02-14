@@ -72,11 +72,11 @@ CoceFetcher.prototype.aws = function(ids) {
       hostname: 'images-na.ssl-images-amazon.com',
       method: 'HEAD',
       headers: {'user-agent': 'Mozilla/5.0'},
-      path: '/images/P/' + search + '.01.MZZZZZZZZZ.jpg',
+      path: '/images/P/' + search + '.01.LZZZZZZZZZ.jpg',
     };
     https.get(opts, (res) => {
       const url = 'https://' + opts.hostname + opts.path;
-      if (res.statusCode == 200 || res.statusCode == 403) repo.addurl('aws', id, url);
+      if (res.statusCode === 200 || res.statusCode === 403) repo.addurl('aws', id, url);
       repo.increment();
       i++;
       // timeout for next request
